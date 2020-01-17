@@ -33,17 +33,13 @@ def run_optimization(path_out):
             df_output.loc[t, '_'.join([str(j), 'gas'])] = instance.gen_chp_gas[j, t].value
             df_output.loc[t, '_'.join([str(j), 'power'])] = instance.gen_chp_power[j, t].value
             df_output.loc[t, '_'.join([str(j), 'heat'])] = instance.gen_chp_heat[j, t].value
-            df_output.loc[t, '_'.join([str(j), 'oh'])] = instance.on_chp[j, t].value\
-                * df_chp_costs.loc[j, 'oh']
-            df_output.loc[t, '_'.join([str(j), 'grid'])] = instance.gen_chp_gas[j, t].value\
-                * df_chp_costs.loc[j, 'grid']
+            df_output.loc[t, '_'.join([str(j), 'oh'])] = instance.on_chp[j, t].value
+            df_output.loc[t, '_'.join([str(j), 'grid'])] = instance.gen_chp_gas[j, t].value
         for j in instance.j_heat_plant.value:
             df_output.loc[t, '_'.join([str(j), 'gas'])] = instance.gen_heat_plant_gas[j, t].value
             df_output.loc[t, '_'.join([str(j), 'heat'])] = instance.gen_heat_plant_heat[j, t].value
-            df_output.loc[t, '_'.join([str(j), 'oh'])] = instance.on_heat_plant[j, t].value\
-                * df_heat_plant_costs.loc[j, 'oh']
-            df_output.loc[t, '_'.join([str(j), 'grid'])] = instance.gen_heat_plant_gas[j, t].value\
-                * df_heat_plant_costs.loc[j, 'grid']
+            df_output.loc[t, '_'.join([str(j), 'oh'])] = instance.on_heat_plant[j, t].value
+            df_output.loc[t, '_'.join([str(j), 'grid'])] = instance.gen_heat_plant_gas[j, t].value
         for j in instance.j_store.value:
             df_output.loc[t, '_'.join([str(j), 'charge'])] = instance.store_charge[j, t].value
             df_output.loc[t, '_'.join([str(j), 'capacity'])] = instance.store_capacity[j, t].value

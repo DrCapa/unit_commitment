@@ -37,8 +37,14 @@ def costs_per_unit(df_data, units, costs, df_chp_costs, df_heat_plant_costs,
             name = unit+'_'+cost
             if((cost == 'gas' or cost == 'spot') and name in df_temp_sum):
                 df_costs.loc[unit, cost] = df_temp_sum[name]
-            if((cost == 'oh' or cost == 'grid') and name in df_data_sum):
-                df_costs.loc[unit, cost] = df_data_sum[name]
+            if((cost == 'oh' or cost == 'grid') and
+                (name in df_data_sum) and
+                ('chp' in unit)):
+                df_costs.loc[unit, cost] = df_data_sum[name]*df_chp_costs.loc[unit, cost]
+            if((cost == 'oh' or cost == 'grid') and
+                (name in df_data_sum) and
+                ('heat_plant' in unit)):
+                df_costs.loc[unit, cost] = df_data_sum[name]*df_heat_plant_costs.loc[unit, cost]
     df_costs = df_costs.fillna(0)
     # Export
     export = pd.ExcelWriter(path_out+'costs_per_unit.xlsx',
