@@ -122,7 +122,7 @@ def capacity_store(m, j, t):
     if t == m.t.first():
         return m.store_capacity[j, t] == 0
     else:
-        return (m.store_capacity[j, t] <=
+        return (m.store_capacity[j, t] ==
                 m.store_capacity[j, t-1]+m.store_charge[j, t]-m.store_discharge[j, t])
 m.capacitystore = Constraint(m.j_store, m.t, rule=capacity_store)
 
